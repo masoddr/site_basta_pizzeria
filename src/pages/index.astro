@@ -51,12 +51,16 @@ import Layout from '../layouts/Layout.astro';
     <!-- Hero Section -->
     <section class="hero min-h-screen bg-gradient-to-r from-[#21329c] to-[#1a2677] flex items-center">
       <div class="container mx-auto px-4 flex flex-col md:flex-row items-center md:items-stretch h-full">
-        <div class="flex-1 flex flex-col justify-center items-start md:pr-16 py-32 md:py-48 animate-fade-in">
-          <h1 class="text-5xl md:text-6xl font-bold mb-6 text-[#fff1b0] hover:scale-105 transition-transform duration-300">Basta Pizzeria</h1>
+        <div class="flex-1 flex flex-col justify-center items-start md:pr-16 pt-40 pb-32 md:py-48 animate-fade-in">
+          <h1 class="text-5xl md:text-6xl font-bold mb-6 text-[#fff1b0] hover:scale-105 transition-transform duration-300 mt-20 md:mt-0">Basta Pizzeria</h1>
           <p class="text-xl md:text-2xl mb-4 text-[#fff1b0] hover:text-white transition-colors duration-300">72h de fermentation, pour plus de légèreté! Pour une pâte fondante et à la fois croquante ! 🍕 Tous nos produits proviennent d'Italie, y compris nos bières, nos produits son AOP, DOP, IGP.</p>
           <a href="https://www.order.store/fr/store/basta-pizza/d-6BFRriVsmWgtgMuw-ocw" target="_blank" 
-             class="bg-[#fff1b0] text-[#21329c] px-8 py-3 rounded-full text-lg font-semibold hover:bg-white hover:scale-110 transition-all duration-300 transform hover:shadow-lg">
+             class="bg-[#fff1b0] text-[#21329c] px-8 py-3 rounded-full text-lg font-semibold hover:bg-white hover:scale-110 transition-all duration-300 transform hover:shadow-lg mb-4 block">
             Commander maintenant
+          </a>
+          <a href="/menu" 
+             class="bg-[#21329c] text-[#fff1b0] px-8 py-3 rounded-full text-lg font-semibold border-2 border-[#fff1b0] hover:bg-[#1a2677] hover:text-white hover:scale-105 transition-all duration-300 transform hover:shadow-lg block">
+            Découvrir la carte
           </a>
         </div>
         <div class="flex-1 hidden md:flex items-center justify-center py-32 md:py-48">
@@ -75,6 +79,98 @@ import Layout from '../layouts/Layout.astro';
                    class="w-full h-48 object-cover rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer" />
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nos best-sellers -->
+    <section class="py-20 bg-[#21329c]">
+      <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-bold mb-12 text-[#fff1b0] text-center">Nos pizzas préférées</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <!-- Carte 1 -->
+          <div class="bg-white/90 rounded-3xl shadow-xl flex flex-col items-center p-8 hover:scale-105 hover:shadow-2xl transition-transform duration-300">
+            <img src="/images/pizzas/margherita.jpg" alt="Pizza Margherita" class="w-full h-48 object-cover rounded-xl mb-4" />
+            <h3 class="text-2xl font-bold text-[#21329c] mb-2 uppercase tracking-wide">MARGHERITA</h3>
+            <span class="bg-[#21329c] text-[#fff1b0] text-xs px-3 py-1 rounded-full mb-2">Best-seller</span>
+            <span class="text-lg font-semibold text-[#21329c] mb-2">12,90 €</span>
+            <p class="text-[#21329c] text-center text-lg">Tomate san marzano, parmesan, mozzarella fior di latte et basilic.</p>
+          </div>
+          <!-- Carte 2 -->
+          <div class="bg-white/90 rounded-3xl shadow-xl flex flex-col items-center p-8 hover:scale-105 hover:shadow-2xl transition-transform duration-300">
+            <img src="/images/pizzas/margherita.jpg" alt="Pizza Margherita" class="w-full h-48 object-cover rounded-xl mb-4" />
+            <h3 class="text-2xl font-bold text-[#21329c] mb-2 uppercase tracking-wide">FORMAGGI</h3>
+            <span class="bg-[#21329c] text-[#fff1b0] text-xs px-3 py-1 rounded-full mb-2">Best-seller</span>
+            <span class="text-lg font-semibold text-[#21329c] mb-2">15,50 €</span>
+            <p class="text-[#21329c] text-center text-lg">Ricotta, parmesan, mozzarella fior di latte, gorgonzola, confiture d'abricot...</p>
+          </div>
+          <!-- Carte 3 -->
+          <div class="bg-white/90 rounded-3xl shadow-xl flex flex-col items-center p-8 hover:scale-105 hover:shadow-2xl transition-transform duration-300">
+            <img src="/images/pizzas/margherita.jpg" alt="Pizza Margherita" class="w-full h-48 object-cover rounded-xl mb-4" />
+            <h3 class="text-2xl font-bold text-[#21329c] mb-2 uppercase tracking-wide">SALSICCIA</h3>
+            <span class="bg-[#21329c] text-[#fff1b0] text-xs px-3 py-1 rounded-full mb-2">Best-seller</span>
+            <span class="text-lg font-semibold text-[#21329c] mb-2">16,40 €</span>
+            <p class="text-[#21329c] text-center text-lg">Mozzarella fior di latte, gorgonzola, saucisse de Toulouse, confiture...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Avis clients (carrousel) -->
+    <section class="py-20 bg-[#21329c]">
+      <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-bold mb-12 text-[#fff1b0] text-center">Ils nous adorent !</h2>
+        <div class="relative max-w-2xl mx-auto min-w-0">
+          <div id="carousel-avis" class="overflow-hidden rounded-3xl shadow-xl bg-white/90 w-full">
+            <div class="flex w-full flex-nowrap transition-transform duration-500" id="carousel-inner">
+              <!-- Avis 1 -->
+              <div class="w-full flex-shrink-0 flex flex-col items-center p-8">
+                <div class="flex items-center mb-2">
+                  <span class="text-yellow-400 text-2xl">★★★★★</span>
+                </div>
+                <p class="text-[#21329c] text-center text-lg mb-4">
+                  "Pizzas succulentes, pâte et produits incroyables et accueil au top ! Meilleure pizzeria de Toulouse de loin !!"
+                </p>
+                <span class="font-semibold text-[#21329c]">Sheun Nicolas</span>
+                <span class="text-xs text-[#21329c]">il y a 3 mois</span>
+              </div>
+              <!-- Avis 2 -->
+              <div class="w-full flex-shrink-0 flex flex-col items-center p-8">
+                <div class="flex items-center mb-2">
+                  <span class="text-yellow-400 text-2xl">★★★★★</span>
+                </div>
+                <p class="text-[#21329c] text-center text-lg mb-4">
+                  "Pizzas vraiment excellentes ! Super service, rapide et personnel très sympathique je recommande à 100% :)"
+                </p>
+                <span class="font-semibold text-[#21329c]">Léa MOCHALSKI</span>
+                <span class="text-xs text-[#21329c]">il y a 2 mois</span>
+              </div>
+              <!-- Avis 3 -->
+              <div class="w-full flex-shrink-0 flex flex-col items-center p-8">
+                <div class="flex items-center mb-2">
+                  <span class="text-yellow-400 text-2xl">★★★★★</span>
+                </div>
+                <p class="text-[#21329c] text-center text-lg mb-4">
+                  "Une pâte napolitaine comme on les aime, un beau mix de recettes originales-classiques qui vient satisfaire tous les goûts, de bons ingrédients : les codes d'une bonne pizzeria sont respectés !"
+                </p>
+                <span class="font-semibold text-[#21329c]">Manon S</span>
+                <span class="text-xs text-[#21329c]">il y a 9 mois</span>
+              </div>
+            </div>
+          </div>
+          <!-- Contrôles carrousel -->
+          <div class="flex justify-center mt-6 space-x-4">
+            <button aria-label="Avis précédent" id="carousel-prev" class="bg-[#fff1b0] text-[#21329c] rounded-full p-2 shadow hover:bg-white transition"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg></button>
+            <button aria-label="Avis suivant" id="carousel-next" class="bg-[#fff1b0] text-[#21329c] rounded-full p-2 shadow hover:bg-white transition"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></button>
+          </div>
+        </div>
+        <div class="text-center mt-8">
+          <a href="https://www.google.com/search?q=BASTA%20Avis&rflfq=1&num=20&stick=H4sIAAAAAAAAAONgkxI2sjA2NjGxNDQxszAzN7Q0NTQx3cDI-IqRy8kxOMRRwbEss3gRKxIHAPTtqBE0AAAA&rldimm=2833449146867195145&tbm=lcl&client=firefox-b-d&cs=1&hl=fr&sa=X&ved=0CAgQ5foLahcKEwiI6dL74JyNAxUAAAAAHQAAAAAQEg&biw=1536&bih=703&dpr=1.25#lkt=LocalPoiReviews&arid=ChdDSUhNMG9nS0VJQ0FnTUNZMU0tSndBRRAB" 
+             target="_blank" rel="noopener" 
+             class="inline-flex items-center px-6 py-3 bg-white text-[#21329c] font-bold rounded-full shadow-lg border-2 border-[#fff1b0] hover:bg-[#fff1b0] hover:text-[#21329c] transition-all duration-300">
+            Voir tous les avis sur Google
+            <svg class="ml-2 w-5 h-5 text-[#21329c]" fill="currentColor" viewBox="0 0 20 20"><path d="M12.293 3.293a1 1 0 011.414 0l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414-1.414L15.586 10H3a1 1 0 110-2h12.586l-3.293-3.293a1 1 0 010-1.414z"/></svg>
+          </a>
         </div>
       </div>
     </section>
@@ -206,6 +302,36 @@ import Layout from '../layouts/Layout.astro';
       }
     });
   });
+
+  window.onload = function() {
+    // Carrousel avis clients
+    let carouselIndex = 0;
+    const carouselInner = document.getElementById('carousel-inner');
+    const prevBtn = document.getElementById('carousel-prev');
+    const nextBtn = document.getElementById('carousel-next');
+    function updateCarousel() {
+      if(carouselInner) {
+        carouselInner.style.transform = `translateX(-${carouselIndex * 100}%)`;
+      }
+    }
+    prevBtn?.addEventListener('click', () => {
+      carouselIndex = (carouselIndex + 2) % 3;
+      updateCarousel();
+    });
+    nextBtn?.addEventListener('click', () => {
+      carouselIndex = (carouselIndex + 1) % 3;
+      updateCarousel();
+    });
+    // Accessibilité clavier
+    [prevBtn, nextBtn].forEach(btn => {
+      btn?.addEventListener('keydown', e => {
+        if(e.key === 'Enter' || e.key === ' ') {
+          btn.click();
+        }
+      });
+    });
+    updateCarousel();
+  }
 </script>
 
 <style>
