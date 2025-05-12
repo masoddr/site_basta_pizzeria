@@ -1,0 +1,17 @@
+[
+  {"name": "FORMAGGI", "price": "15,50 €", "description": "Ricotta, parmesan, mozzarella fior di latte, gorgonzola, confiture d'abricot..."},
+  {"name": "CARBONARA", "price": "15,00 €", "description": "Mozzarella fior di latte, parmesan, guanciale, jaune d'œuf et poivre."},
+  {"name": "SALSICCIA", "price": "16,40 €", "description": "Mozzarella fior di latte, gorgonzola, saucisse de Toulouse, confiture...", "tag": "Populaire"},
+  {"name": "REGINA", "price": "15,00 €", "description": "Tomate san marzano, parmesan, mozzarella fior di latte, champignons..."},
+  {"name": "MARGHERITA", "price": "12,90 €", "description": "Tomate san marzano, parmesan, mozzarella fior di latte et basilic."},
+  {"name": "PARMA", "price": "17,40 €", "description": "Tomate san marzano, parmesan, mozzarella fior di latte, jambon de..."},
+  {"name": "DIAVOLA", "price": "17,40 €", "description": "Tomate san marzano, parmesan, gorgonzola, pancetta, spianata piccante..."},
+  {"name": "TARTUFATA", "price": "18,40 €", "description": "Crème de truffe, mozzarella fior di latte, champignons sautés, jambon cuit aux..."},
+  {"name": "PEPPERONI", "price": "16,40 €", "description": "Tomate san marzano, parmesan, mozzarella fior di latte, pepperoni, miel..."},
+  {"name": "PROVOLA", "price": "15,90 €", "description": "Crème, mozzarella fior di latte, provola fumée, confiture d'oignons et noix."},
+  {"name": "MORTADELLA", "price": "18,40 €", "description": "Ricotta, mozzarella fior di latte, mortadelle à la pistache, stracciatella...", "tag": "Populaire"},
+  {"name": "SPIANATA", "price": "15,40 €", "description": "Tomate san marzano, parmesan, spianata piccante, mozzarella fior di latte..."},
+  {"name": "PESTO", "price": "17,40 €", "description": "Crème de pesto, parmesan, mozzarella fior di latte, stracciatella, tomates..."},
+  {"name": "MARINARA", "price": "11,00 €", "description": "Tomate san marzano, ail et origan."},
+  {"name": "ACCIUGA", "price": "14,40 €", "description": "Tomate san marzano, stracciatella, anchois et basilic."}
+] 

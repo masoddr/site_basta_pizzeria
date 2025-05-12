@@ -1,16 +1,246 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Basta Pizzeria - Les meilleures pizzas de la ville">
+  <!-- Navbar -->
+  <nav class="fixed w-full z-50" style="background: transparent;">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center h-64">
+        <a href="/" class="flex items-center overflow-x-visible mr-8">
+          <img id="basta-logo" src="/basta.png" alt="Basta Pizzeria Logo" class="h-64 w-auto bounce-in-right" />
+        </a>
+        <div class="hidden md:flex space-x-12 items-center h-full py-8">
+          <a href="/menu" class="text-[#fff1b0] hover:text-white transition-colors text-3xl font-semibold">Voir la carte</a>
+          <a href="https://www.order.store/fr/store/basta-pizza/d-6BFRriVsmWgtgMuw-ocw" target="_blank" class="text-[#fff1b0] hover:text-white transition-colors text-3xl font-semibold">Commander</a>
+          <a href="#contact" class="text-[#fff1b0] hover:text-white transition-colors text-3xl font-semibold">Contact</a>
+          <a href="#about" class="text-[#fff1b0] hover:text-white transition-colors text-3xl font-semibold">Qui sommes-nous</a>
+        </div>
+        <!-- Menu mobile -->
+        <button class="md:hidden text-[#fff1b0]" id="mobile-menu-button">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+      <!-- Menu mobile déroulant -->
+      <div class="md:hidden fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#21329c]/95 backdrop-blur-sm transition-all duration-500 ease-out opacity-0 pointer-events-none scale-95" id="mobile-menu">
+        <button id="close-mobile-menu" class="absolute top-6 right-6 text-[#fff1b0] hover:text-white focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+        <div class="w-full max-w-xs mx-auto space-y-6 animate-none" id="mobile-menu-links">
+          <a href="/menu" class="block text-[#fff1b0] hover:text-white transition-colors py-4 text-3xl font-semibold text-center">Voir la carte</a>
+          <a href="https://www.order.store/fr/store/basta-pizza/d-6BFRriVsmWgtgMuw-ocw" target="_blank" class="block text-[#fff1b0] hover:text-white transition-colors py-4 text-3xl font-semibold text-center">Commander</a>
+          <a href="#contact" class="block text-[#fff1b0] hover:text-white transition-colors py-4 text-3xl font-semibold text-center">Contact</a>
+          <a href="#about" class="block text-[#fff1b0] hover:text-white transition-colors py-4 text-3xl font-semibold text-center">Qui sommes-nous</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero min-h-screen bg-gradient-to-r from-[#21329c] to-[#1a2677] flex items-center">
+      <div class="container mx-auto px-4 flex flex-col md:flex-row items-center md:items-stretch h-full">
+        <div class="flex-1 flex flex-col justify-center items-start md:pr-16 py-32 md:py-48 animate-fade-in">
+          <h1 class="text-5xl md:text-6xl font-bold mb-6 text-[#fff1b0] hover:scale-105 transition-transform duration-300">Basta Pizzeria</h1>
+          <p class="text-xl md:text-2xl mb-4 text-[#fff1b0] hover:text-white transition-colors duration-300">72h de fermentation, pour plus de légèreté! Pour une pâte fondante et à la fois croquante ! 🍕 Tous nos produits proviennent d'Italie, y compris nos bières, nos produits son AOP, DOP, IGP.</p>
+          <a href="https://www.order.store/fr/store/basta-pizza/d-6BFRriVsmWgtgMuw-ocw" target="_blank" 
+             class="bg-[#fff1b0] text-[#21329c] px-8 py-3 rounded-full text-lg font-semibold hover:bg-white hover:scale-110 transition-all duration-300 transform hover:shadow-lg">
+            Commander maintenant
+          </a>
+        </div>
+        <div class="flex-1 hidden md:flex items-center justify-center py-32 md:py-48">
+          <!-- Images -->
+          <div class="grid grid-cols-2 gap-4 w-full self-center">
+            <div class="space-y-4">
+              <img src="/images/studio-1.jpg" alt="Salle de restaurant" 
+                   class="w-full h-48 object-cover rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer" />
+              <img src="/images/studio-2.jpg" alt="Ambiance pizza" 
+                   class="w-full h-64 object-cover rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer" />
+            </div>
+            <div class="space-y-4 pt-8">
+              <img src="/images/studio-3.jpg" alt="Équipe Basta" 
+                   class="w-full h-64 object-cover rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer" />
+              <img src="/images/studio-4.jpg" alt="Détail pizza" 
+                   class="w-full h-48 object-cover rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Notre Histoire Section -->
+    <section id="about" class="py-20 bg-[#21329c] hover:bg-[#1a2677] transition-colors duration-500">
+      <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center">
+          <h2 class="text-4xl font-bold mb-8 text-[#fff1b0] hover:scale-105 transition-transform duration-300 inline-block">Notre Histoire</h2>
+          <p class="text-lg mb-6 text-[#fff1b0] hover:text-white transition-colors duration-300">
+            Romain, c'est l'histoire d'un amour inconditionnel pour la pizza. Chaque part, chaque saveur raconte une passion dévorante, un vrai voyage culinaire à partager.
+          </p>
+          <p class="text-lg mb-6 text-[#fff1b0] hover:text-white transition-colors duration-300">
+            Depuis 2010, Basta Pizzeria vous propose des pizzas artisanales préparées avec passion et des ingrédients de qualité. Notre secret ? Une pâte maison reposée 24h et des produits frais sélectionnés avec soin.
+          </p>
+          <p class="text-lg text-[#fff1b0] hover:text-white transition-colors duration-300">
+            Venez découvrir notre savoir-faire et notre ambiance chaleureuse dans notre restaurant situé au cœur de la ville.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Commander Section -->
+    <section id="commander" class="py-20 bg-[#21329c] hover:bg-[#1a2677] transition-colors duration-500">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-4xl font-bold mb-8 text-[#fff1b0] hover:scale-105 transition-transform duration-300 inline-block">Commandez en ligne</h2>
+        <p class="text-xl mb-8 text-[#fff1b0] hover:text-white transition-colors duration-300">Livraison rapide ou à emporter</p>
+        <a href="https://www.order.store/fr/store/basta-pizza/d-6BFRriVsmWgtgMuw-ocw" target="_blank" 
+           class="bg-[#fff1b0] text-[#21329c] px-8 py-3 rounded-full text-lg font-semibold hover:bg-white hover:scale-110 transition-all duration-300 transform hover:shadow-lg inline-block">
+          Voir le menu
+        </a>
+      </div>
+    </section>
+
+    <!-- Carte Google Maps -->
+    <section class="py-12 bg-[#21329c] hover:bg-[#1a2677] transition-colors duration-500">
+      <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-bold mb-8 text-[#fff1b0] hover:scale-105 transition-transform duration-300 text-center inline-block">Notre Restaurant</h2>
+        <div class="w-full h-[400px] rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d1250.4569529509454!2d1.429635307903675!3d43.59743346620152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sbasta%20pizza%20toulouse!5e0!3m2!1sfr!2sfr!4v1747009532603!5m2!1sfr!2sfr" 
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+            class="rounded-2xl"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-black py-12 hover:bg-gray-900 transition-colors duration-500">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="hover:scale-105 transition-transform duration-300">
+            <h3 class="text-xl font-semibold mb-4 text-[#fff1b0]">Contact</h3>
+            <p class="text-[#fff1b0] hover:text-white transition-colors duration-300">33 Rue de Varsovie</p>
+            <p class="text-[#fff1b0] hover:text-white transition-colors duration-300">31300, Toulouse</p>
+            <p class="text-[#fff1b0] hover:text-white transition-colors duration-300">bastapizze@gmail.com</p>
+            <p class="text-[#fff1b0] hover:text-white transition-colors duration-300">+33650171948</p>
+          </div>
+          <div class="hover:scale-105 transition-transform duration-300">
+            <h3 class="text-xl font-semibold mb-4 text-[#fff1b0]">Horaires</h3>
+            <p class="text-[#fff1b0] hover:text-white transition-colors duration-300">de 11h30 à 14h15</p>
+          </div>
+          <div class="hover:scale-105 transition-transform duration-300">
+            <h3 class="text-xl font-semibold mb-4 text-[#fff1b0]">Suivez-nous</h3>
+            <div class="flex space-x-6 items-center">
+              <a href="https://www.instagram.com/bastapizze" target="_blank" rel="noopener" aria-label="Instagram" 
+                 class="hover:opacity-80 hover:scale-110 transition-all duration-300">
+                <img src="/logo/instagram.svg" alt="Instagram" class="h-8 w-8" />
+              </a>
+              <a href="https://deliveroo.fr/fr/menu/toulouse/saint-cyprien/basta-pizza-33-rue-de-varsovie" target="_blank" rel="noopener" aria-label="Deliveroo" 
+                 class="hover:opacity-80 hover:scale-110 transition-all duration-300">
+                <img src="/logo/delivreroo.svg" alt="Deliveroo" class="h-8 w-8" />
+              </a>
+              <a href="https://www.order.store/fr/store/basta-pizza/d-6BFRriVsmWgtgMuw-ocw?ps=1" target="_blank" rel="noopener" aria-label="Uber Eats" 
+                 class="hover:opacity-80 hover:scale-110 transition-all duration-300">
+                <img src="/logo/ubereat.svg" alt="Uber Eats" class="h-8 w-8" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+</Layout>
+
+<script>
+  // Gestion du menu mobile avec animation et bouton close
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileMenuLinks = document.getElementById('mobile-menu-links');
+  const closeMobileMenu = document.getElementById('close-mobile-menu');
+
+  mobileMenuButton?.addEventListener('click', () => {
+    if (mobileMenu && mobileMenuLinks) {
+      if (mobileMenu.classList.contains('opacity-0')) {
+        mobileMenu.classList.remove('opacity-0', 'pointer-events-none', 'scale-95');
+        mobileMenu.classList.add('opacity-100', 'pointer-events-auto', 'scale-100');
+        mobileMenuLinks.classList.add('slide-in-menu');
+      } else {
+        mobileMenu.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
+        mobileMenu.classList.remove('opacity-100', 'pointer-events-auto', 'scale-100');
+        mobileMenuLinks.classList.remove('slide-in-menu');
+      }
+    }
+  });
+
+  closeMobileMenu?.addEventListener('click', () => {
+    if (mobileMenu && mobileMenuLinks) {
+      mobileMenu.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
+      mobileMenu.classList.remove('opacity-100', 'pointer-events-auto', 'scale-100');
+      mobileMenuLinks.classList.remove('slide-in-menu');
+    }
+  });
+
+  // Fermer le menu mobile lors du clic sur un lien
+  const mobileLinks = mobileMenu?.querySelectorAll('a');
+  mobileLinks?.forEach(link => {
+    link.addEventListener('click', () => {
+      if (mobileMenu && mobileMenuLinks) {
+        mobileMenu.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
+        mobileMenu.classList.remove('opacity-100', 'pointer-events-auto', 'scale-100');
+        mobileMenuLinks.classList.remove('slide-in-menu');
+      }
+    });
+  });
+</script>
+
+<style>
+  .bounce-in-right {
+    animation: bounce-in-right 2s ease 1;
+  }
+  @keyframes bounce-in-right {
+    0% {
+      opacity: 0;
+      transform: translateX(2000px);
+    }
+    60% {
+      opacity: 1;
+      transform: translateX(-30px);
+    }
+    80% { transform: translateX(10px); }
+    100% { transform: translateX(0); }
+  }
+  .slide-in-menu {
+    animation: slide-in-menu 0.5s cubic-bezier(.68,-0.55,.27,1.55);
+  }
+  @keyframes slide-in-menu {
+    0% {
+      opacity: 0;
+      transform: translateY(-40px) scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  .animate-fade-in {
+    animation: fade-in 1s ease-out;
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
