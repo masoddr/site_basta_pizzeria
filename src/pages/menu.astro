@@ -43,7 +43,7 @@ import pizzas from '../data/pizzas.json';
 
   <main class="min-h-screen bg-gradient-to-r from-[#21329c] to-[#1a2677] pt-40 md:pt-72 pb-24">
     <div class="container mx-auto px-4">
-      <h1 class="text-5xl md:text-6xl font-bold text-[#fff1b0] mb-12 text-center">Notre carte</h1>
+      <h1 class="text-5xl md:text-6xl font-bold text-[#fff1b0] mb-12 text-center mt-20 md:mt-0">Notre carte</h1>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {pizzas.map((pizza) => (
           <div class="bg-white/90 rounded-3xl shadow-xl flex flex-col items-center p-8 hover:scale-105 transition-transform duration-300">
@@ -171,4 +171,11 @@ import pizzas from '../data/pizzas.json';
       }
     }
   </style>
+
+  <!-- Bouton appel flottant mobile -->
+  <a href="tel:+33650171948" aria-label="Appeler Basta Pizzeria" class="fixed bottom-8 left-8 bg-[#fff1b0] text-[#21329c] p-4 rounded-full shadow-lg md:hidden z-50 hover:bg-white transition-all flex items-center justify-center">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5.75A2.75 2.75 0 015.75 3h2.1a2 2 0 012 1.72l.3 2.13a2 2 0 01-1.1 2.13l-.7.35a16.06 16.06 0 006.36 6.36l.35-.7a2 2 0 012.13-1.1l2.13.3A2 2 0 0121 16.15v2.1A2.75 2.75 0 0118.25 21h-.5C9.6 21 3 14.4 3 6.25v-.5z"/>
+    </svg>
+  </a>
 </Layout> 
