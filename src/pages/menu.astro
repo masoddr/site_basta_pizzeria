@@ -18,7 +18,7 @@ import pizzas from '../data/pizzas.json';
           <a href="#about" class="text-[#fff1b0] hover:text-white transition-colors text-3xl font-semibold">Qui sommes-nous</a>
         </div>
         <!-- Menu mobile -->
-        <button class="md:hidden text-[#fff1b0]" id="mobile-menu-button">
+        <button class="md:hidden text-[#fff1b0]" id="mobile-menu-button" aria-label="Ouvrir le menu mobile">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
@@ -26,7 +26,7 @@ import pizzas from '../data/pizzas.json';
       </div>
       <!-- Menu mobile déroulant -->
       <div class="md:hidden fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#21329c]/95 backdrop-blur-sm transition-all duration-500 ease-out opacity-0 pointer-events-none scale-95" id="mobile-menu">
-        <button id="close-mobile-menu" class="absolute top-6 right-6 text-[#fff1b0] hover:text-white focus:outline-none">
+        <button id="close-mobile-menu" class="absolute top-6 right-6 text-[#fff1b0] hover:text-white focus:outline-none" aria-label="Fermer le menu mobile">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
@@ -40,13 +40,6 @@ import pizzas from '../data/pizzas.json';
       </div>
     </div>
   </nav>
-
-  <!-- Bouton retour en haut -->
-  <button id="backToTop" class="fixed bottom-8 right-8 bg-[#fff1b0] text-[#21329c] p-3 rounded-full shadow-lg opacity-0 transition-all duration-300 hover:scale-110 hover:bg-white z-50">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
-    </svg>
-  </button>
 
   <main class="min-h-screen bg-gradient-to-r from-[#21329c] to-[#1a2677] pt-40 md:pt-72 pb-24">
     <div class="container mx-auto px-4">
@@ -119,15 +112,11 @@ import pizzas from '../data/pizzas.json';
     // Gestion de la navbar au scroll
     window.addEventListener('scroll', () => {
       if (navbar) {
-        const currentScrollY = window.scrollY;
-        if (currentScrollY > lastScrollY) {
-          // Scrolling down
-          navbar.style.transform = 'translateY(-100%)';
-        } else {
-          // Scrolling up
+        if (window.scrollY === 0) {
           navbar.style.transform = 'translateY(0)';
+        } else {
+          navbar.style.transform = 'translateY(-100%)';
         }
-        lastScrollY = currentScrollY;
       }
     });
 

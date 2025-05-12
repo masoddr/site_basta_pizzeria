@@ -14,11 +14,46 @@ const { title } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <meta name="description" content="Basta Pizzeria à Toulouse : pizzas artisanales, produits italiens AOP/DOP/IGP, pâte 72h fermentation, ambiance conviviale. Commandez en ligne ou sur place !" />
     <!-- Import Google Fonts Quicksand -->
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
   </head>
   <body style="font-family: 'Quicksand', Arial, Helvetica, sans-serif;">
     <slot />
+    <footer id="contact" class="bg-black py-12 hover:bg-gray-900 transition-colors duration-500">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="hover:scale-105 transition-transform duration-300">
+            <h3 class="text-xl font-semibold mb-4 text-[#fff1b0]">Contact</h3>
+            <p class="text-[#fff1b0] hover:text-white transition-colors duration-300">33 Rue de Varsovie</p>
+            <p class="text-[#fff1b0] hover:text-white transition-colors duration-300">31300, Toulouse</p>
+            <p class="text-[#fff1b0] hover:text-white transition-colors duration-300">bastapizze@gmail.com</p>
+            <p class="text-[#fff1b0] hover:text-white transition-colors duration-300">+33650171948</p>
+          </div>
+          <div class="hover:scale-105 transition-transform duration-300">
+            <h3 class="text-xl font-semibold mb-4 text-[#fff1b0]">Horaires</h3>
+            <p class="text-[#fff1b0] hover:text-white transition-colors duration-300">de 11h30 à 14h15</p>
+          </div>
+          <div class="hover:scale-105 transition-transform duration-300">
+            <h3 class="text-xl font-semibold mb-4 text-[#fff1b0]">Suivez-nous</h3>
+            <div class="flex space-x-6 items-center">
+              <a href="https://www.instagram.com/bastapizze" target="_blank" rel="noopener" aria-label="Instagram" 
+                 class="hover:opacity-80 hover:scale-110 transition-all duration-300">
+                <img src="/logo/instagram.svg" alt="Instagram" class="h-8 w-8" />
+              </a>
+              <a href="https://deliveroo.fr/fr/menu/toulouse/saint-cyprien/basta-pizza-33-rue-de-varsovie" target="_blank" rel="noopener" aria-label="Deliveroo" 
+                 class="hover:opacity-80 hover:scale-110 transition-all duration-300">
+                <img src="/logo/delivreroo.svg" alt="Deliveroo" class="h-8 w-8" />
+              </a>
+              <a href="https://www.order.store/fr/store/basta-pizza/d-6BFRriVsmWgtgMuw-ocw?ps=1" target="_blank" rel="noopener" aria-label="Uber Eats" 
+                 class="hover:opacity-80 hover:scale-110 transition-all duration-300">
+                <img src="/logo/ubereat.svg" alt="Uber Eats" class="h-8 w-8" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
 
