@@ -5,7 +5,7 @@ import pizzas from '../data/pizzas.json';
 
 <Layout title="Menu - Basta Pizzeria">
   <!-- Navbar -->
-  <nav class="fixed w-full z-50" style="background: transparent;">
+  <nav id="navbar" class="fixed w-full z-50 top-0 transition-transform duration-300" style="background: transparent;">
     <div class="container mx-auto px-4">
       <div class="flex justify-between items-center h-64">
         <a href="/" class="flex items-center overflow-x-visible mr-8">
@@ -40,6 +40,13 @@ import pizzas from '../data/pizzas.json';
       </div>
     </div>
   </nav>
+
+  <!-- Bouton retour en haut -->
+  <button id="backToTop" class="fixed bottom-8 right-8 bg-[#fff1b0] text-[#21329c] p-3 rounded-full shadow-lg opacity-0 transition-all duration-300 hover:scale-110 hover:bg-white z-50">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+    </svg>
+  </button>
 
   <main class="min-h-screen bg-gradient-to-r from-[#21329c] to-[#1a2677] pt-40 md:pt-72 pb-24">
     <div class="container mx-auto px-4">
@@ -102,6 +109,45 @@ import pizzas from '../data/pizzas.json';
           mobileMenu.classList.remove('opacity-100', 'pointer-events-auto', 'scale-100');
           mobileMenuLinks.classList.remove('slide-in-menu');
         }
+      });
+    });
+
+    const backToTopButton = document.getElementById('backToTop');
+    const navbar = document.getElementById('navbar');
+    let lastScrollY = window.scrollY;
+
+    // Gestion de la navbar au scroll
+    window.addEventListener('scroll', () => {
+      if (navbar) {
+        const currentScrollY = window.scrollY;
+        if (currentScrollY > lastScrollY) {
+          // Scrolling down
+          navbar.style.transform = 'translateY(-100%)';
+        } else {
+          // Scrolling up
+          navbar.style.transform = 'translateY(0)';
+        }
+        lastScrollY = currentScrollY;
+      }
+    });
+
+    // Gestion du bouton retour en haut
+    window.addEventListener('scroll', () => {
+      if (backToTopButton) {
+        if (window.scrollY > 300) {
+          backToTopButton.classList.remove('opacity-0');
+          backToTopButton.classList.add('opacity-100');
+        } else {
+          backToTopButton.classList.add('opacity-0');
+          backToTopButton.classList.remove('opacity-100');
+        }
+      }
+    });
+
+    backToTopButton?.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
       });
     });
   </script>
