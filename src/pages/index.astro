@@ -248,7 +248,7 @@ import Layout from '../layouts/Layout.astro';
   // Gestion de la navbar au scroll
   window.addEventListener('scroll', () => {
     if (navbar) {
-      if (window.scrollY === 0) {
+      if (window.scrollY <= 80) {
         navbar.style.transform = 'translateY(0)';
       } else {
         navbar.style.transform = 'translateY(-100%)';
