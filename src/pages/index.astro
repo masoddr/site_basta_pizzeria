@@ -23,22 +23,27 @@ import Layout from '../layouts/Layout.astro';
           </svg>
         </button>
       </div>
-      <!-- Menu mobile déroulant -->
-      <div class="md:hidden fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#21329c]/95 backdrop-blur-sm transition-all duration-500 ease-out opacity-0 pointer-events-none scale-95" id="mobile-menu">
-        <button id="close-mobile-menu" class="absolute top-6 right-6 text-[#fff1b0] hover:text-white focus:outline-none" aria-label="Fermer le menu mobile">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-        <div class="w-full max-w-xs mx-auto space-y-6 animate-none" id="mobile-menu-links">
-          <a href="/menu" class="block text-[#fff1b0] hover:text-white transition-colors py-4 text-3xl font-semibold text-center">Voir la carte</a>
-          <a href="https://www.order.store/fr/store/basta-pizza/d-6BFRriVsmWgtgMuw-ocw" target="_blank" class="block text-[#fff1b0] hover:text-white transition-colors py-4 text-3xl font-semibold text-center">Commander</a>
-          <a href="#contact" class="block text-[#fff1b0] hover:text-white transition-colors py-4 text-3xl font-semibold text-center">Contact</a>
-          <a href="#about" class="block text-[#fff1b0] hover:text-white transition-colors py-4 text-3xl font-semibold text-center">Qui sommes-nous</a>
-        </div>
-      </div>
     </div>
   </nav>
+
+  <!-- Menu mobile DOIT être en dehors du nav/container pour couvrir tout l'écran et ne pas être limité par un parent. 
+  Règle à suivre sur tous les projets Astro/Tailwind :
+  - Placez le menu mobile (fixed/inset-0) en enfant direct de <body> ou <header>, jamais dans un container ou nav avec des contraintes de taille.
+  - Ajoutez le blocage du scroll du body quand le menu est ouvert (overflow-hidden sur body).
+  -->
+  <div class="md:hidden fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#21329c]/95 backdrop-blur-sm transition-all duration-500 ease-out opacity-0 pointer-events-none scale-95" id="mobile-menu">
+    <button id="close-mobile-menu" class="absolute top-6 right-6 text-[#fff1b0] hover:text-white focus:outline-none" aria-label="Fermer le menu mobile">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+    <div class="w-full max-w-xs mx-auto space-y-6 animate-none" id="mobile-menu-links">
+      <a href="/menu" class="block text-[#fff1b0] hover:text-white transition-colors py-4 text-3xl font-semibold text-center">Voir la carte</a>
+      <a href="https://www.order.store/fr/store/basta-pizza/d-6BFRriVsmWgtgMuw-ocw" target="_blank" class="block text-[#fff1b0] hover:text-white transition-colors py-4 text-3xl font-semibold text-center">Commander</a>
+      <a href="#contact" class="block text-[#fff1b0] hover:text-white transition-colors py-4 text-3xl font-semibold text-center">Contact</a>
+      <a href="#about" class="block text-[#fff1b0] hover:text-white transition-colors py-4 text-3xl font-semibold text-center">Qui sommes-nous</a>
+    </div>
+  </div>
 
   <!-- Bouton retour en haut -->
   <button id="backToTop" aria-label="Retour en haut" class="fixed bottom-8 right-8 bg-[#fff1b0] text-[#21329c] p-3 rounded-full shadow-lg opacity-0 transition-all duration-300 hover:scale-110 hover:bg-white z-50">
@@ -245,13 +250,29 @@ import Layout from '../layouts/Layout.astro';
 
   let lastScrollY = window.scrollY;
 
+  /**
+   * Bloque ou débloque le scroll du body (à réutiliser sur tous projets Astro/Tailwind)
+   * @param {boolean} lock - true pour bloquer, false pour débloquer
+   */
+  function lockBodyScroll(lock) {
+    if (lock) {
+      document.body.classList.add('overflow-hidden');
+      document.body.style.height = '100vh';
+    } else {
+      document.body.classList.remove('overflow-hidden');
+      document.body.style.height = '';
+    }
+  }
+
   // Gestion de la navbar au scroll
   window.addEventListener('scroll', () => {
     if (navbar) {
-      if (window.scrollY <= 80) {
+      if (window.scrollY <= 0) {
         navbar.style.transform = 'translateY(0)';
+        navbar.classList.remove('navbar-compact');
       } else {
-        navbar.style.transform = 'translateY(-100%)';
+        navbar.style.transform = 'translateY(0)'; // Toujours visible
+        navbar.classList.add('navbar-compact');
       }
     }
   });
@@ -276,16 +297,19 @@ import Layout from '../layouts/Layout.astro';
     });
   });
 
+  // Ouvre/Ferme le menu mobile et bloque le scroll
   mobileMenuButton?.addEventListener('click', () => {
     if (mobileMenu && mobileMenuLinks) {
       if (mobileMenu.classList.contains('opacity-0')) {
         mobileMenu.classList.remove('opacity-0', 'pointer-events-none', 'scale-95');
         mobileMenu.classList.add('opacity-100', 'pointer-events-auto', 'scale-100');
         mobileMenuLinks.classList.add('slide-in-menu');
+        lockBodyScroll(true);
       } else {
         mobileMenu.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
         mobileMenu.classList.remove('opacity-100', 'pointer-events-auto', 'scale-100');
         mobileMenuLinks.classList.remove('slide-in-menu');
+        lockBodyScroll(false);
       }
     }
   });
@@ -295,6 +319,7 @@ import Layout from '../layouts/Layout.astro';
       mobileMenu.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
       mobileMenu.classList.remove('opacity-100', 'pointer-events-auto', 'scale-100');
       mobileMenuLinks.classList.remove('slide-in-menu');
+      lockBodyScroll(false);
     }
   });
 
@@ -306,6 +331,7 @@ import Layout from '../layouts/Layout.astro';
         mobileMenu.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
         mobileMenu.classList.remove('opacity-100', 'pointer-events-auto', 'scale-100');
         mobileMenuLinks.classList.remove('slide-in-menu');
+        lockBodyScroll(false);
       }
     });
   });
@@ -382,5 +408,36 @@ import Layout from '../layouts/Layout.astro';
       opacity: 1;
       transform: translateY(0);
     }
+  }
+  /* Navbar compacte au scroll */
+  .navbar-compact {
+    height: 48px !important;
+    min-height: 48px !important;
+    background: rgba(33, 50, 156, 0.98) !important;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
+    transition: height 0.4s cubic-bezier(.4,0,.2,1), background 0.3s cubic-bezier(.4,0,.2,1), box-shadow 0.3s cubic-bezier(.4,0,.2,1);
+  }
+  .navbar-compact .container {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    transition: padding-top 0.4s cubic-bezier(.4,0,.2,1), padding-bottom 0.4s cubic-bezier(.4,0,.2,1);
+  }
+  .navbar-compact #basta-logo {
+    height: 40px !important;
+    max-height: 40px !important;
+    transition: height 0.4s cubic-bezier(.4,0,.2,1), max-height 0.4s cubic-bezier(.4,0,.2,1);
+  }
+  .navbar-compact .py-8 {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    transition: padding-top 0.4s cubic-bezier(.4,0,.2,1), padding-bottom 0.4s cubic-bezier(.4,0,.2,1);
+  }
+  .navbar-compact .h-64 {
+    height: 48px !important;
+    transition: height 0.4s cubic-bezier(.4,0,.2,1);
+  }
+  .navbar-compact .md\:flex a {
+    font-size: 1.25rem !important; /* text-xl */
+    transition: font-size 0.3s cubic-bezier(.4,0,.2,1);
   }
 </style>
