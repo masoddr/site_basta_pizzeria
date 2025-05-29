@@ -1,0 +1,183 @@
+---
+// Composant Navbar centralisé pour toutes les pages
+---
+<nav id="navbar" class="fixed w-full z-50 top-0 transition-transform duration-300" style="background: transparent;">
+  <div class="container mx-auto px-4">
+    <div class="flex justify-between items-center h-64">
+      <a href="/" class="flex items-center overflow-x-visible mr-8">
+        <img id="basta-logo" src="/basta.png" alt="Basta Pizzeria Logo" class="h-64 w-auto bounce-in-right" />
+      </a>
+      <div class="hidden md:flex space-x-12 items-center h-full py-8">
+        <a href="/menu" class="text-[#fff1b0] hover:text-white transition-colors text-3xl font-semibold">Voir la carte</a>
+        <a href="https://www.order.store/fr/store/basta-pizza/d-6BFRriVsmWgtgMuw-ocw" target="_blank" class="text-[#fff1b0] hover:text-white transition-colors text-3xl font-semibold">Commander</a>
+        <a href="#contact" class="text-[#fff1b0] hover:text-white transition-colors text-3xl font-semibold">Contact</a>
+        <a href="#about" class="text-[#fff1b0] hover:text-white transition-colors text-3xl font-semibold">Qui sommes-nous</a>
+      </div>
+      <!-- Menu mobile -->
+      <button class="md:hidden text-[#fff1b0]" id="mobile-menu-button" aria-label="Ouvrir le menu mobile">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+<!-- Menu mobile EN DEHORS du nav/container pour couvrir tout l'écran -->
+<div class="md:hidden fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#21329c]/95 backdrop-blur-sm transition-all duration-500 ease-out opacity-0 pointer-events-none scale-95" id="mobile-menu">
+  <button id="close-mobile-menu" class="absolute top-6 right-6 text-[#fff1b0] hover:text-white focus:outline-none" aria-label="Fermer le menu mobile">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+  <div class="w-full max-w-xs mx-auto space-y-6 animate-none" id="mobile-menu-links">
+    <a href="/menu" class="block text-[#fff1b0] hover:text-white transition-colors py-4 text-3xl font-semibold text-center">Voir la carte</a>
+    <a href="https://www.order.store/fr/store/basta-pizza/d-6BFRriVsmWgtgMuw-ocw" target="_blank" class="block text-[#fff1b0] hover:text-white transition-colors py-4 text-3xl font-semibold text-center">Commander</a>
+    <a href="#contact" class="block text-[#fff1b0] hover:text-white transition-colors py-4 text-3xl font-semibold text-center">Contact</a>
+    <a href="#about" class="block text-[#fff1b0] hover:text-white transition-colors py-4 text-3xl font-semibold text-center">Qui sommes-nous</a>
+  </div>
+</div>
+<script is:inline>
+// Gestion du menu mobile avec animation et bouton close
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+const mobileMenuLinks = document.getElementById('mobile-menu-links');
+const closeMobileMenu = document.getElementById('close-mobile-menu');
+const navbar = document.getElementById('navbar');
+
+// Empêche le scroll du body quand le menu mobile est ouvert
+/**
+ * Bloque ou débloque le scroll du body (à réutiliser sur tous projets Astro/Tailwind)
+ * @param {boolean} lock - true pour bloquer, false pour débloquer
+ */
+function lockBodyScroll(lock) {
+  if (lock) {
+    document.body.classList.add('overflow-hidden');
+    document.body.style.height = '100vh';
+  } else {
+    document.body.classList.remove('overflow-hidden');
+    document.body.style.height = '';
+  }
+}
+
+// Ouvre/Ferme le menu mobile et bloque le scroll
+mobileMenuButton?.addEventListener('click', () => {
+  if (mobileMenu && mobileMenuLinks) {
+    if (mobileMenu.classList.contains('opacity-0')) {
+      mobileMenu.classList.remove('opacity-0', 'pointer-events-none', 'scale-95');
+      mobileMenu.classList.add('opacity-100', 'pointer-events-auto', 'scale-100');
+      mobileMenuLinks.classList.add('slide-in-menu');
+      lockBodyScroll(true);
+    } else {
+      mobileMenu.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
+      mobileMenu.classList.remove('opacity-100', 'pointer-events-auto', 'scale-100');
+      mobileMenuLinks.classList.remove('slide-in-menu');
+      lockBodyScroll(false);
+    }
+  }
+});
+
+closeMobileMenu?.addEventListener('click', () => {
+  if (mobileMenu && mobileMenuLinks) {
+    mobileMenu.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
+    mobileMenu.classList.remove('opacity-100', 'pointer-events-auto', 'scale-100');
+    mobileMenuLinks.classList.remove('slide-in-menu');
+    lockBodyScroll(false);
+  }
+});
+
+// Fermer le menu mobile lors du clic sur un lien
+const mobileLinks = mobileMenu?.querySelectorAll('a');
+mobileLinks?.forEach(link => {
+  link.addEventListener('click', () => {
+    if (mobileMenu && mobileMenuLinks) {
+      mobileMenu.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
+      mobileMenu.classList.remove('opacity-100', 'pointer-events-auto', 'scale-100');
+      mobileMenuLinks.classList.remove('slide-in-menu');
+      lockBodyScroll(false);
+    }
+  });
+});
+
+// Navbar compacte au scroll
+window.addEventListener('scroll', () => {
+  if (navbar) {
+    if (window.scrollY <= 0) {
+      navbar.style.transform = 'translateY(0)';
+      navbar.classList.remove('navbar-compact');
+    } else {
+      navbar.style.transform = 'translateY(0)'; // Toujours visible
+      navbar.classList.add('navbar-compact');
+    }
+  }
+});
+</script>
+<style>
+.bounce-in-right {
+  animation: bounce-in-right 2s ease 1;
+}
+@keyframes bounce-in-right {
+  0% {
+    opacity: 0;
+    transform: translateX(2000px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(-30px);
+  }
+  80% { transform: translateX(10px); }
+  100% { transform: translateX(0); }
+}
+.slide-in-menu {
+  animation: slide-in-menu 0.5s cubic-bezier(.68,-0.55,.27,1.55);
+}
+@keyframes slide-in-menu {
+  0% {
+    opacity: 0;
+    transform: translateY(-40px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+nav#navbar {
+  transition: height 0.4s cubic-bezier(.4,0,.2,1), background 0.3s cubic-bezier(.4,0,.2,1), box-shadow 0.3s cubic-bezier(.4,0,.2,1);
+}
+.container {
+  transition: padding-top 0.4s cubic-bezier(.4,0,.2,1), padding-bottom 0.4s cubic-bezier(.4,0,.2,1);
+}
+#basta-logo {
+  transition: height 0.4s cubic-bezier(.4,0,.2,1), max-height 0.4s cubic-bezier(.4,0,.2,1);
+}
+.py-8 {
+  transition: padding-top 0.4s cubic-bezier(.4,0,.2,1), padding-bottom 0.4s cubic-bezier(.4,0,.2,1);
+}
+.h-64 {
+  transition: height 0.4s cubic-bezier(.4,0,.2,1);
+}
+.navbar-compact {
+  height: 48px !important;
+  min-height: 48px !important;
+  background: rgba(33, 50, 156, 0.98) !important;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
+}
+.navbar-compact .container {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+.navbar-compact #basta-logo {
+  height: 40px !important;
+  max-height: 40px !important;
+}
+.navbar-compact .py-8 {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+.navbar-compact .h-64 {
+  height: 48px !important;
+}
+.navbar-compact .md\:flex a {
+  font-size: 1.25rem !important; /* text-xl */
+  transition: font-size 0.3s cubic-bezier(.4,0,.2,1);
+}
+</style> 
